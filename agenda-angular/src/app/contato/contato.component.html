@@ -12,17 +12,99 @@
   </button>
 </mat-toolbar>
 <div class="container">
-  <div class="w-6/12">
-    <form>
-      <mat-form-field class="full-width">
-        <mat-label>Nome:</mat-label>
-        <input matInput placeholder="digite seu nome" />
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <mat-label>Nome:</mat-label>
-        <input matInput placeholder="digite seu nome" />
-      </mat-form-field>
-      <button mat-button color="primary">Primary</button>
-    </form>
-  </div>
+  <mat-tab-group mat-align-tabs="start">
+    <!-- Lista TAB -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class='material-icons mr-3'>toc</span>
+        Lista
+      </ng-template>
+      <table mat-table [dataSource]="contatos" class="w-full">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID</th>
+          <td mat-cell *matCellDef="let contato">{{ contato.id }}</td>
+        </ng-container>
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef> NOME</th>
+          <td mat-cell *matCellDef="let contato">{{ contato.nome }}</td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> EMAIL</th>
+          <td mat-cell *matCellDef="let contato">{{ contato.email }}</td>
+        </ng-container>
+        <ng-container matColumnDef="favorito">
+          <th mat-header-cell *matHeaderCellDef> FAVORITO</th>
+          <td mat-cell *matCellDef="let contato">
+            {{setLoading(contato,true)}}
+            <mat-spinner *ngIf="contato.loading" [diameter]="32"></mat-spinner>
+            <button mat-icon-button *ngIf="!contato.loading == true">
+              <mat-icon class="color-red" (click)="favoritar(contato)">
+                {{contato.favorito ? 'favorite' : 'favorite_border'}}
+              </mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="telefone">
+          <th mat-header-cell *matHeaderCellDef> TELEFONE</th>
+          <td mat-cell *matCellDef="let contato">{{ contato.telefone }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+        <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+      </table>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class='material-icons mr-3'>addchart</span>
+        Formulário
+      </ng-template>
+      <div class="w-12/12 mt-4
+                 md:w-6/12">
+        <mat-card class="shadow-0-important">
+          <mat-card-title>Novo Contato</mat-card-title>
+          <mat-card-content>
+            <form class="wiggle" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+              <mat-form-field class="full-width">
+                <mat-label>Nome:</mat-label>
+                <input formControlName="nome" autocomplete="off" matInput placeholder="digite seu nome"/>
+              </mat-form-field>
+              <div
+                class="text-red-500 mt-1 mb-2 {{formulario.controls.nome.errors && formulario.controls.nome.errors.required ? 'opacity-1' : 'opacity-0' }}">
+                campo nome obrigatório *
+              </div>
+
+              <mat-form-field class="full-width">
+                <mat-label>Email:</mat-label>
+                <input formControlName="email" autocomplete="off" matInput placeholder="digite seu email"/>
+              </mat-form-field>
+              <div class="text-red-500 mt-1 mb-2"
+                   *ngIf="formulario.controls.email.errors && formulario.controls.email.errors.email">
+                campo email inválido *
+              </div>
+              <div class="text-red-500 mt-1 mb-2"
+                   *ngIf="formulario.controls.email.errors && formulario.controls.email.errors.required">
+                campo email obrigatório *
+              </div>
+
+              <section class="full-width mt-5 mb-2">
+                <mat-checkbox formControlName="favorito">Favorito</mat-checkbox>
+              </section>
+              <mat-form-field class="full-width">
+                <mat-label>Telefone:</mat-label>
+                <input formControlName="telefone" autocomplete="off" matInput placeholder="digite seu telefone"/>
+              </mat-form-field>
+              <div class="text-red-500 mt-1 mb-2 {{formulario.controls.telefone.errors && formulario.controls.telefone.errors.required ? 'opacity-1' : 'opacity-0'}}" >
+                campo telefone obrigatório *
+              </div>
+
+              <button [disabled]="!this.formulario.valid"  mat-raised-button color="primary">Enviar</button>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+
+  </mat-tab-group>
 </div>
+

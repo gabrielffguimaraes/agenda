@@ -5,3 +5,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-form-field-wrapper {
+  padding-bottom: 0px !important;
+}
+.mat-form-field-appearance-legacy
+.mat-form-field-underline {
+  bottom:0em !important;
+}
+.container {
+  max-width: 1366px !important;
+}
+.shadow-0-important {
+  box-shadow: none !important;
+}
+.color-red {
+  color:red !important;
+}
+*,*:focus,*:hover{
+  outline:none !important;
+}

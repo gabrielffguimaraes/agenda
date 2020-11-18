@@ -4,4 +4,5 @@ export class Contato {
   email: string;
   favorito: boolean;
   telefone: string;
+  loading: boolean;
 }

@@ -40,11 +40,12 @@ public class ContatoController {
         return this.contatoRepository.findAll();
     }
 
-    @PatchMapping("{id}/favorite/{flag}")
-    public void favorite(@PathVariable(name="id") Integer id , @PathVariable (name="flag") Boolean favorite){
+    @PatchMapping("{id}/favorite")
+    public void favorite(@PathVariable(name="id") Integer id , @RequestBody Contato contatoBody){
         Optional<Contato> contato = contatoRepository.findById(id);
         contato.ifPresent( c -> {
-            c.setFavorito(favorite);
+            boolean favorito = contatoBody.getFavorito() == Boolean.TRUE;
+            c.setFavorito(!favorito);
             contatoRepository.save(c);
         });
                 /*
