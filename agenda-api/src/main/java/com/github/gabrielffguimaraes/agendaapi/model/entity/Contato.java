@@ -30,4 +30,8 @@ public class Contato {
     @Column
     private String telefone;
 
+    @Column
+    @Lob
+    private byte[] foto;
+
 }

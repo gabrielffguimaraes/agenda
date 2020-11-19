@@ -18,12 +18,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule} from '@angular/material/card';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ContatoModalComponent } from './modais/contato-modal/contato-modal.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     ContatoComponent,
-    AnimationsComponent
+    AnimationsComponent,
+    ContatoModalComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     HttpClientModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
   providers: [ContatoService],
   bootstrap: [AppComponent]

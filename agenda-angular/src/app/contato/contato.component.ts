@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Contato} from './contato';
-import {ContatoService} from '../services/contato.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Contato } from './contato';
+import { ContatoService } from '../services/contato.service';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ContatoModalComponent } from '../modais/contato-modal/contato-modal.component';
 
 @Component({
   selector: 'app-contato',
@@ -9,15 +11,17 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./contato.component.css']
 })
 export class ContatoComponent implements OnInit {
+  foto: any;
   formulario: FormGroup;
   contatos: Contato[];
   colunas: string[] = [
+    'foto',
     'nome',
     'email',
     'favorito',
     'telefone'
   ];
-  constructor( private contatoService: ContatoService, private formBuilder: FormBuilder) { }
+  constructor( private dialog: MatDialog, private contatoService: ContatoService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.montarFormulario();
@@ -28,7 +32,8 @@ export class ContatoComponent implements OnInit {
       nome: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
       favorito: [false],
-      telefone: ['', Validators.required]
+      telefone: ['', Validators.required],
+      foto: []
     });
   }
   listarContatos(): void {
@@ -51,6 +56,12 @@ export class ContatoComponent implements OnInit {
 
       });
   }
+  setFoto(event){
+    const files = event.target.files;
+    if (files){
+      this.foto = files[0];
+    }
+  }
   setLoading(contato: Contato, flag: boolean = null): void {
     if (flag) {
       contato.loading = contato.loading === undefined ? false : contato.loading;
@@ -58,9 +69,13 @@ export class ContatoComponent implements OnInit {
       contato.loading = !(contato.loading);
     }
   }
-  onSubmit(): void {
-    let c: Contato = new Contato();
-    c = this.formulario.value;
+  onSubmit(): any {
+    const c: FormData = new FormData();
+    c.append('nome', this.formulario.value.nome);
+    c.append('email', this.formulario.value.email);
+    c.append('favorito', this.formulario.value.favorito);
+    c.append('telefone', this.formulario.value.telefone);
+    c.append('foto', this.foto);
 
     this.contatoService
       .save(c)
@@ -70,5 +85,12 @@ export class ContatoComponent implements OnInit {
       }, errors => {
         console.log(errors);
       });
+  }
+  openDetalhesModal(contato: Contato): void {
+    this.dialog.open( ContatoModalComponent , {
+        width: '600px',
+       height: '500px',
+         data: contato
+    });
   }
 }

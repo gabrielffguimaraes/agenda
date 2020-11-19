@@ -5,4 +5,5 @@ export class Contato {
   favorito: boolean;
   telefone: string;
   loading: boolean;
+  foto: any;
 }
