@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EnableAutoConfiguration
 public class Contato {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

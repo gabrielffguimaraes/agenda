@@ -6,6 +6,8 @@ import com.github.gabrielffguimaraes.agendaapi.model.repository.ContatoRepositor
 import lombok.RequiredArgsConstructor;
 import lombok.var;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -35,8 +37,8 @@ public class ContatoController {
     {
         Contato contatoRetorno = null;
         try {
-            InputStream is = foto.getInputStream();
             byte[] bytes = new byte[(int) foto.getSize()];
+            InputStream is = foto.getInputStream();
             IOUtils.readFully(is, bytes);
             Contato contato = new Contato().
                     builder().
@@ -66,8 +68,17 @@ public class ContatoController {
     }
 
     @GetMapping
-    public List<Contato> listarTodos(){
-        return this.contatoRepository.findAll();
+    public Page<Contato> listarTodos(
+            @RequestParam(value="page" , defaultValue = "0") Integer pagina,
+            @RequestParam(value="size" , defaultValue = "10") Integer tamanhoPagina
+        ){
+        PageRequest pageRequest = PageRequest.of(pagina , tamanhoPagina);
+        return this.contatoRepository.findAll(pageRequest);
+    }
+
+    @GetMapping("{id}")
+    public Contato pegarPorId (@PathVariable Integer id) {
+        return this.contatoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"contato não encontrado ."));
     }
 
     @PatchMapping("{id}/favorite")
@@ -81,21 +92,36 @@ public class ContatoController {
                 /*
                 orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Contato nao encontrado"));*/
     }
-    @PutMapping("{id}/foto")
-   public byte[] adicionarFoto(@PathVariable Integer id,@RequestParam("foto") Part file){
-        Optional<Contato> contato = this.contatoRepository.findById(id);
-        return contato.map(c -> {
-            try{
-                InputStream is = file.getInputStream();
-                byte[] bytes = new byte[(int) file.getSize()];
-                IOUtils.readFully(is , bytes);
-                c.setFoto(bytes);
-                contatoRepository.save(c);
-                is.close();
-                return bytes;
-            }catch(Exception e){
-                return null;
-            }
-        }).orElse(null);
-   }
+    @PutMapping("{id}")
+    public Contato editarContato(@PathVariable("id") Integer id,
+                                 @RequestParam("nome") String nome,
+                                 @RequestParam("email") String email,
+                                 @RequestParam("favorito") Boolean favorito,
+                                 @RequestParam("telefone") String telefone,
+                                 @RequestParam("foto") Part foto){
+        try {
+            String temFoto = foto.getSubmittedFileName();
+            byte[] fotoAtualizada = new byte[(int) foto.getSize()]; // CARREGA O ARRAY DE BYTE EM MEMORIA
+
+            InputStream is = foto.getInputStream(); // DECLARA UM INPUTSTREM PARA SER LIDO
+            IOUtils.readFully(is , fotoAtualizada); // METODO PARA CARREGAR MEU INPUTSTREAM DA FOTO DENTRO DO ARRAY DE BYTES VAZIO
+            is.close(); // FECHANDO O INPUT STREAM ABERTO
+            Contato contato = new Contato();
+            return this.contatoRepository.findById(id).map( c -> {
+                contato.setId(id);
+                contato.setNome(nome);
+                contato.setEmail(email);
+                contato.setFavorito(favorito);
+                contato.setTelefone(telefone);
+                if(temFoto != null) {
+                    contato.setFoto(fotoAtualizada);
+                } else {
+                    contato.setFoto(c.getFoto());
+                }
+                return this.contatoRepository.save(contato);
+            }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"contato não encontrado"));
+        } catch( Exception e){
+            return null;
+        }
+    }
 }

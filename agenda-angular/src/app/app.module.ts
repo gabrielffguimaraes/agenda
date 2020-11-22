@@ -18,10 +18,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule} from '@angular/material/card';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ContatoModalComponent } from './modais/contato-modal/contato-modal.component';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,9 @@ import { ContatoModalComponent } from './modais/contato-modal/contato-modal.comp
     HttpClientModule,
     ReactiveFormsModule,
     MatCheckboxModule,
+    MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatPaginatorModule,
     MatDialogModule
   ],
   providers: [ContatoService],
