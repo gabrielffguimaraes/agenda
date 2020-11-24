@@ -90,21 +90,21 @@
               <form id="form-contato" class="wiggle" [formGroup]="formulario" (ngSubmit)="onSubmit()">
                 <mat-form-field class="full-width">
                   <mat-label>Nome:</mat-label>
-                  <input formControlName="nome" autocomplete="off" matInput placeholder="digite seu nome"/>
+                  <input formControlName="nome" autocomplete="new-nome" matInput placeholder="digite seu nome"/>
                 </mat-form-field>
                 <div
                   class="text-red-500 mt-1 mb-2 {{!formulario.controls.nome.pristine && formulario.controls.nome.errors && formulario.controls.nome.errors.required ? 'opacity-1' : 'opacity-0' }}">
                   campo nome obrigatório *
-                </div>
+                </div> 
 
                 <mat-form-field class="full-width">
                   <mat-label>Email:</mat-label>
-                  <input formControlName="email" autocomplete="off" matInput placeholder="digite seu email"/>
+                  <input formControlName="email" autocomplete="new-email" matInput placeholder="digite seu email"/>
                 </mat-form-field>
                 <div class="text-red-500 mt-1 mb-2"
                      *ngIf="!formulario.controls.email.pristine && formulario.controls.email.errors && formulario.controls.email.errors.email">
                   campo email inválido *
-                </div>
+                </div> 
                 <div class="text-red-500 mt-1 mb-2"
                      *ngIf="!formulario.controls.email.pristine && formulario.controls.email.errors && formulario.controls.email.errors.required">
                   campo email obrigatório *
@@ -113,9 +113,9 @@
                 <section class="full-width mt-5 mb-2">
                   <mat-checkbox formControlName="favorito">Favorito</mat-checkbox>
                 </section>
-                <mat-form-field class="full-width">
+                <mat-form-field class="full-width"> 
                   <mat-label>Telefone:</mat-label>
-                  <input formControlName="telefone" autocomplete="off" matInput placeholder="digite seu telefone"/>
+                  <input formControlName="telefone" autocomplete="new-telefone" matInput placeholder="digite seu telefone"/>
                 </mat-form-field>
                 <div class="text-red-500 mt-1 mb-2 {{!formulario.controls.telefone.pristine && formulario.controls.telefone.errors && formulario.controls.telefone.errors.required ? 'opacity-1' : 'opacity-0'}}" >
                   campo telefone obrigatório *
