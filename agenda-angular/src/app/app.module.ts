@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContatoComponent } from './contato/contato.component';
 import { ContatoService } from './services/contato.service.js';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AnimationsComponent } from './animations/animations.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -23,12 +23,16 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ContatoModalComponent } from './modais/contato-modal/contato-modal.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { LoginComponent } from './login/login.component';
+import {OauthService} from './services/oauth.service';
+import {TokenInterceptor} from './services/token.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
     ContatoComponent,
     AnimationsComponent,
-    ContatoModalComponent
+    ContatoModalComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

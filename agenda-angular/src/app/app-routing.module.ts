@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ContatoComponent } from './contato/contato.component';
+import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
-  {path: '', component: ContatoComponent},
+  {path: '', component: LoginComponent},
+  {path: 'contatos', component: ContatoComponent},
   {path: '**', redirectTo: '', pathMatch: 'full' }
   ];
 

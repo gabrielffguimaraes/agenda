@@ -55,7 +55,6 @@ export class ContatoComponent implements OnInit {
       (screenCurrentWidth > 800)?this.colunas = ['foto','nome','email','telefone','favorito','edit']:null;
 
   }
-
   ngOnInit(): void {
     this.definirTabs(); // define as tabs pelos parametros passados na url
     this.preparaEditar(this.selecionado);  // define o formulario adicionar/editar pelo id passado na url
