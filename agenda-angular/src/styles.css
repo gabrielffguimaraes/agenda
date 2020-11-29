@@ -12,6 +12,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-form-field-underline {
   bottom:0em !important;
 }
+mat-tab-group .mat-tab-body {
+  min-height:200px !important;
+}
 .container {
   max-width: 1366px !important;
 }
@@ -65,3 +68,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .max-width-400{
   max-width:400px;
 }
+
+
+

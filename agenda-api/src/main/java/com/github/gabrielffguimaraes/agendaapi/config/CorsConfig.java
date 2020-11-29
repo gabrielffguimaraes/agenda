@@ -13,17 +13,17 @@ import java.util.List;
 @Configuration
 public class CorsConfig {
     @Bean
-    public FilterRegistrationBean<CorsFilter> cors () {
-        List<String> all = Arrays.asList("*");
+    public FilterRegistrationBean<CorsFilter> corsFilterFilterRegistrationBean(){
+
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(all);
-        corsConfiguration.setAllowedHeaders(all);
-        corsConfiguration.setAllowedMethods(all);
+        List<String> All = Arrays.asList("*");
+        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        corsConfiguration.setAllowedHeaders(All);
+        corsConfiguration.setAllowedMethods(All);
         corsConfiguration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",corsConfiguration);
-
         CorsFilter corsFilter = new CorsFilter(source);
         FilterRegistrationBean<CorsFilter> filter = new FilterRegistrationBean<>(corsFilter);
         filter.setOrder(Ordered.HIGHEST_PRECEDENCE);

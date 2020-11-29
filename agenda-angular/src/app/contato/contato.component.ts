@@ -10,6 +10,9 @@ import { Location } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
 import { Base64toFile} from "../Base64toFile";
 import {PageEvent} from '@angular/material/paginator';
+import {OauthService} from "../services/oauth.service";
+
+
 @Component({
   selector: 'app-contato',
   templateUrl: './contato.component.html',
@@ -41,6 +44,7 @@ export class ContatoComponent implements OnInit {
   // MatPaginator Output
   pageEvent: PageEvent;
   constructor(
+               private oauth: OauthService,
                private dialog: MatDialog,
                private contatoService: ContatoService,
                private formBuilder: FormBuilder,
@@ -155,7 +159,7 @@ export class ContatoComponent implements OnInit {
     this.tabActive = index;
     const tab = "?tab="+ (index+1);
     const id = (this.selecionado) ? "&id="+this.selecionado : "";
-    this.location.go(`${tab}${id}`);
+    this.location.go(`contatos/${tab}${id}`);
   }
   setLoading(contato: Contato, flag: boolean = null): void {
     if (flag) {
@@ -220,5 +224,9 @@ export class ContatoComponent implements OnInit {
   }
   e(id: string ): any {
     return document.querySelector(id);
+  }
+  logout(): void {
+    this.oauth.logout();
+    this._route.navigate(['/']);
   }
 }

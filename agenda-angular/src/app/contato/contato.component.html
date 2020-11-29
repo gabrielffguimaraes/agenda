@@ -3,7 +3,11 @@
   perm_contact_calendar
   </span>
   <span>Contatos</span>
-  <span class="example-spacer"></span>
+  <a mat-icon-button class="mr-5" style="position:absolute;right:10px" (click)="logout()">
+    <span class="material-icons" style="transform:rotate(180deg)">
+    login
+    </span>
+  </a>
 </mat-toolbar>
 <div class="container" >
   <mat-tab-group mat-align-tabs="start" [(selectedIndex)]="tabActive" (selectedIndexChange)="setTab($event)">

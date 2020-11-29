@@ -54,7 +54,11 @@ import {TokenInterceptor} from './services/token.interceptor';
     MatPaginatorModule,
     MatDialogModule
   ],
-  providers: [ContatoService],
+  providers: [ContatoService, OauthService , {
+      provide: HTTP_INTERCEPTORS,
+     useClass: TokenInterceptor,
+        multi: true
+  }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
