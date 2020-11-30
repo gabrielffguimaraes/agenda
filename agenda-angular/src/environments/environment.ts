@@ -4,6 +4,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/api/contatos',
+  apiUsuarios: 'http://localhost:8080/api/usuarios',
   apiOauth: 'http://localhost:8080/oauth/token',
   clientID: 'contato-application',
   secretID: '@321'

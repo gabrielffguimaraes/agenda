@@ -10,9 +10,12 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 })
 export class OauthService {
   apiOauth = environment.apiOauth;
-
+  apiUsuarios = environment.apiUsuarios;
   constructor(private http: HttpClient) {}
 
+  cadastrar(usuario: Usuario): Observable<any> {
+    return this.http.post<any>(this.apiUsuarios,usuario);
+  }
   logar(usuario: Usuario): Observable<any> {
     const params = new HttpParams()
       .set('username', usuario.usuario)
