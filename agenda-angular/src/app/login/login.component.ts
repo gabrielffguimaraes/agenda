@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup , FormBuilder, Validators} from '@angular/forms';
+import { FormGroup , FormBuilder, Validators, FormControl, ValidatorFn} from '@angular/forms';
 import { Usuario } from './usuario';
 import { OauthService } from '../services/oauth.service';
 import { Router } from '@angular/router';
 import { Validacoes } from '../Validacoes';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         toast.addEventListener('mouseleave', Swal.resumeTimer)
       }
     })
-    this.montarFormulario();
+    this.montarFormulario(null);
   }
   setState(flag : boolean | null): void
   {
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     usuario.usuario = this.formulario.value.login;
     usuario.senha = this.formulario.value.senha;
     this.spinLogin = true;
-    this.flagCadastro == false ? this.logar(usuario) : this.cadastrar(usuario);  
+    this.flagCadastro == false ? this.logar(usuario) : this.cadastrar(usuario);
   }
   cadastrar(usuario: Usuario): void | boolean
   {
@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
         }
       );
   }
-  logar (usuario: Usuario): void 
+  logar (usuario: Usuario): void
   {
     this.oauth
       .logar(usuario)
@@ -107,7 +107,7 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-  
+
   validarSenhas = (control: FormControl): ValidatorFn => {
      try{
        if ((this.formulario.get('senha').value == this.formulario.get('csenha').value) || this.flagCadastro == false){
@@ -117,7 +117,8 @@ export class LoginComponent implements OnInit {
         /*console.log(e)*/
      }
 
-     return { csenhaValida: true };
+     // @ts-ignore
+    return { csenhaValida: true };
   }
   senhaObrigatoria = (control: FormControl): ValidatorFn => {
       if (
@@ -130,6 +131,7 @@ export class LoginComponent implements OnInit {
     ) {
       return null;
     }
+    // @ts-ignore
     return { required: true};
   }
 }

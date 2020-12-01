@@ -32,8 +32,11 @@ public class Contato {
     @Column
     private String telefone;
 
+    @ManyToOne
+    @JoinColumn(name="id_usuario",nullable = false)
+    private Usuario usuario;
+
     @Column
     @Lob
     private byte[] foto;
-
 }

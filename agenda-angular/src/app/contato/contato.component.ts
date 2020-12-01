@@ -8,10 +8,10 @@ import { Validacoes } from '../Validacoes';
 import { ActivatedRoute , Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
-import { Base64toFile} from "../Base64toFile";
-import {PageEvent} from '@angular/material/paginator';
-import {OauthService} from "../services/oauth.service";
-
+import { Base64toFile } from "../Base64toFile";
+import { PageEvent } from '@angular/material/paginator';
+import { OauthService } from "../services/oauth.service";
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-contato',
@@ -176,13 +176,15 @@ export class ContatoComponent implements OnInit {
   }
   //ADICIONAR //ALTERAR
   onSubmit(): any {
+    const helper = new JwtHelperService();
+    /* PAREI AQUI */
     const c: FormData = new FormData();
     c.append('nome', this.formulario.value.nome);
     c.append('email', this.formulario.value.email);
     c.append('favorito', this.formulario.value.favorito);
     c.append('telefone', this.formulario.value.telefone);
     c.append('foto', this.foto);
-
+    c.append('id_usuario', '10');
     switch(this.edit) {
       case false :
         this.spin = true;

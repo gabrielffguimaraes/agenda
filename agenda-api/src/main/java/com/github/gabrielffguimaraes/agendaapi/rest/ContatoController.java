@@ -2,7 +2,9 @@ package com.github.gabrielffguimaraes.agendaapi.rest;
 
 
 import com.github.gabrielffguimaraes.agendaapi.model.entity.Contato;
+import com.github.gabrielffguimaraes.agendaapi.model.entity.Usuario;
 import com.github.gabrielffguimaraes.agendaapi.model.repository.ContatoRepository;
+import com.github.gabrielffguimaraes.agendaapi.model.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.var;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -21,10 +23,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/contatos")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class ContatoController {
     private final ContatoRepository contatoRepository;
-
+    private final UsuarioRepository usuarioRepository;
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Contato save (
@@ -32,11 +33,15 @@ public class ContatoController {
         @RequestParam("email") String email,
         @RequestParam("favorito") Boolean favorito,
         @RequestParam("telefone") String telefone,
-        @RequestParam("foto") Part foto
+        @RequestParam("foto") Part foto,
+        @RequestParam("id_usuario") Integer id_usuario
     )
     {
+        Usuario usuario = usuarioRepository.findById(id_usuario)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Usuário não encontrado"));
         Contato contatoRetorno = null;
         try {
+
             byte[] bytes = new byte[(int) foto.getSize()];
             InputStream is = foto.getInputStream();
             IOUtils.readFully(is, bytes);
@@ -47,6 +52,7 @@ public class ContatoController {
                     favorito(favorito).
                     telefone(telefone).
                     foto(bytes).
+                    usuario(usuario).
                     build();
             is.close();
             contatoRetorno = this.contatoRepository.save(contato);

@@ -5,7 +5,7 @@ import {Contato} from '../contato/contato';
 import {environment} from '../../environments/environment';
 import {delay} from 'rxjs/operators';
 import {Form} from '@angular/forms';
-import {PaginaContato} from "../contato/paginaContato";
+import {PaginaContato} from '../contato/paginaContato';
 
 @Injectable({
   providedIn: 'root'

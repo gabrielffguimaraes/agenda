@@ -48,10 +48,10 @@
              {{ !flagCadastro ? 'Acessar' : 'Cadastrar-se' }}
             </span>
             <mat-spinner [diameter]="32" *ngIf="spinLogin" class="spin-login"></mat-spinner>
-          </button> 
+          </button>
         </div>
         <div class="text-center mt-3 text-sm text-blue-500 hover:underline">
-          <a (click)="setState()" href="javascript:void(0)">
+          <a (click)="setState(null)" href="javascript:void(0)">
             {{ !flagCadastro ? 'Cadastre-se' : 'Realizar login' }}
           </a>
         </div>
@@ -59,4 +59,3 @@
     </div>
   </div>
 </div>
- 
