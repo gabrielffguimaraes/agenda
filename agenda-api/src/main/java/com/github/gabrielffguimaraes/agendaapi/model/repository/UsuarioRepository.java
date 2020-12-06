@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface UsuarioRepository extends JpaRepository<Usuario,Integer> {
    @Query("select s from Usuario s where s.usuario like :usuario")
    Optional<Usuario> verificarJaCadastrado (@Param("usuario") String nome);
+
+    Usuario findByUsuario(String user_name);
 }

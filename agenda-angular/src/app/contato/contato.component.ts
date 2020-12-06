@@ -175,16 +175,16 @@ export class ContatoComponent implements OnInit {
     this.edit = false;
   }
   //ADICIONAR //ALTERAR
-  onSubmit(): any {
+  onSubmit(): any | boolean {
     const helper = new JwtHelperService();
-    /* PAREI AQUI */
+    let obj = helper.decodeToken(this.oauth.getToken());
     const c: FormData = new FormData();
     c.append('nome', this.formulario.value.nome);
     c.append('email', this.formulario.value.email);
     c.append('favorito', this.formulario.value.favorito);
     c.append('telefone', this.formulario.value.telefone);
     c.append('foto', this.foto);
-    c.append('id_usuario', '10');
+    c.append('user_name', obj.user_name);
     switch(this.edit) {
       case false :
         this.spin = true;

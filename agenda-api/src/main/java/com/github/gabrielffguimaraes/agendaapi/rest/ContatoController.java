@@ -34,11 +34,10 @@ public class ContatoController {
         @RequestParam("favorito") Boolean favorito,
         @RequestParam("telefone") String telefone,
         @RequestParam("foto") Part foto,
-        @RequestParam("id_usuario") Integer id_usuario
+        @RequestParam("user_name") String user_name
     )
     {
-        Usuario usuario = usuarioRepository.findById(id_usuario)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Usuário não encontrado"));
+        Usuario usuario = usuarioRepository.findByUsuario(user_name);
         Contato contatoRetorno = null;
         try {
 
@@ -73,13 +72,24 @@ public class ContatoController {
         ).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Contato nao encotrado"));
     }
 
-    @GetMapping
+    /*@GetMapping
     public Page<Contato> listarTodos(
             @RequestParam(value="page" , defaultValue = "0") Integer pagina,
-            @RequestParam(value="size" , defaultValue = "10") Integer tamanhoPagina
+            @RequestParam(value="size" , defaultValue = "10") Integer tamanhoPagina,
+            @RequestParam(value="user_name") String user_name
         ){
         PageRequest pageRequest = PageRequest.of(pagina , tamanhoPagina);
         return this.contatoRepository.findAll(pageRequest);
+    }*/
+    @GetMapping
+    public Page<Contato> listarTodos(
+            @RequestParam(value="page" , defaultValue = "0") Integer pagina,
+            @RequestParam(value="size" , defaultValue = "10") Integer tamanhoPagina,
+            @RequestParam(value="user_name") String user_name
+    ){
+        Usuario usuario = this.usuarioRepository.findByUsuario(user_name);
+        PageRequest pageRequest = PageRequest.of(pagina , tamanhoPagina);
+        return this.contatoRepository.findAllByUsuario(usuario,pageRequest);
     }
 
     @GetMapping("{id}")
