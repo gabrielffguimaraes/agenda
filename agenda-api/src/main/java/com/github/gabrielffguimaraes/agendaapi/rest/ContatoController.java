@@ -124,17 +124,15 @@ public class ContatoController {
             is.close(); // FECHANDO O INPUT STREAM ABERTO
             Contato contato = new Contato();
             return this.contatoRepository.findById(id).map( c -> {
-                contato.setId(id);
-                contato.setNome(nome);
-                contato.setEmail(email);
-                contato.setFavorito(favorito);
-                contato.setTelefone(telefone);
+                c.setId(id);
+                c.setNome(nome);
+                c.setEmail(email);
+                c.setFavorito(favorito);
+                c.setTelefone(telefone);
                 if(temFoto != null) {
-                    contato.setFoto(fotoAtualizada);
-                } else {
-                    contato.setFoto(c.getFoto());
+                    c.setFoto(fotoAtualizada);
                 }
-                return this.contatoRepository.save(contato);
+                return this.contatoRepository.save(c);
             }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"contato não encontrado"));
         } catch( Exception e){
             return null;
