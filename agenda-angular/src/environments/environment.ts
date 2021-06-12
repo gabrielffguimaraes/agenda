@@ -2,7 +2,7 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 export const environment = {
-  production: false,
+  production: true,
   apiUrl: 'https://agenda-api-br.herokuapp.com/api/contatos',
   apiUsuarios: 'https://agenda-api-br.herokuapp.com/api/usuarios',
   apiOauth: 'https://agenda-api-br.herokuapp.com/oauth/token',
