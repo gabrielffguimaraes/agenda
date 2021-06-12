@@ -1,0 +1,73 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-form-field-wrapper {
+  padding-bottom: 0px !important;
+}
+.mat-form-field-appearance-legacy
+.mat-form-field-underline {
+  bottom:0em !important;
+}
+mat-tab-group .mat-tab-body {
+  min-height:200px !important;
+}
+.container {
+  max-width: 1366px !important;
+}
+.shadow-0-important {
+  box-shadow: none !important;
+}
+.color-red {
+  color:red !important;
+}
+*,*:focus,*:hover{
+  outline:none !important;
+}
+.mat-dialog-container {
+  padding:0px !important;
+  overflow: hidden !important;
+}
+.m-none {
+  margin:0px !important;
+}
+.min-width-25{
+  min-width: 25px;
+}
+.min-width-50{
+  min-width: 50px;
+}
+.min-width-75{
+  min-width: 75px;
+}
+.min-width-100{
+  min-width: 100px;
+}
+.min-width-125{
+  min-width: 125px;
+}
+.min-width-150{
+  min-width: 150px;
+}
+.min-width-175{
+  min-width: 175px;
+}
+.min-width-200{
+  min-width: 200px;
+}
+.min-width-300{
+  min-width: 300px;
+}
+.min-width-350{
+  min-width: 350px;
+}
+
+.max-width-400{
+  max-width:400px;
+}
+
+
+
