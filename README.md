@@ -1,4 +1,4 @@
-# agenda pessoal
+# Agenda Pessoal
 <h2>
     <a href="https://gabrielffguimaraes.github.io/agenda/">🔗 Agenda pessoal Frontend - Angular</a>
 </h2>
