@@ -69,7 +69,7 @@ public class ContatoController {
                    contatoRepository.delete(contato);
                    return Void.TYPE;
                }
-        ).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Contato nao encotrado ."));
+        ).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Contato nao encotrado "));
     }
 
     /*@GetMapping
