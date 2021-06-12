@@ -8,16 +8,13 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 
 @Configuration
 @EnableResourceServer
-@Profile("prod")
-public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+@Profile("dev")
+public class ResourceServerConfigDev extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/api/contatos/**").authenticated()
-                .antMatchers("/api/usuarios/**").permitAll()
-                .anyRequest().denyAll();
+                .antMatchers("/**").permitAll();
     }
-
 }
