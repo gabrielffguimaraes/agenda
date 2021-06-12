@@ -17,5 +17,8 @@
     <a href="https://agenda-api-br.herokuapp.com/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config">🔗 Agenda pessoal API - Java Spring</a>
 </h2>
 
-<p>🚀 projeto de agenda pessoal BACKEND API feito em spring </p>
+<p>🚀 projeto de agenda pessoal BACKEND API feito em spring , com authenticação oauth2</p>
+<p>🚀 API - DOCUMENTAÇÃO </p>
+<img src="https://user-images.githubusercontent.com/62315845/121781249-44768a00-cb7a-11eb-9f45-60a822f60665.png">
+
 
