@@ -17,7 +17,7 @@ public class CorsConfig {
 
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         List<String> All = Arrays.asList("*");
-        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        corsConfiguration.setAllowedOrigins(Arrays.asList("https://agenda-api-br.herokuapp.com"));
         corsConfiguration.setAllowedHeaders(All);
         corsConfiguration.setAllowedMethods(All);
         corsConfiguration.setAllowCredentials(true);
