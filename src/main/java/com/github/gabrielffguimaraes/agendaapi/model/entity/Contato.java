@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
@@ -38,5 +39,6 @@ public class Contato {
 
     @Column
     @Lob
+    @Type(type = "org.hibernate.type.ImageType")
     private byte[] foto;
 }

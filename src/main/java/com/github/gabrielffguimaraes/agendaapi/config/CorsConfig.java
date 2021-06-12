@@ -17,7 +17,7 @@ public class CorsConfig {
 
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         List<String> All = Arrays.asList("*");
-        corsConfiguration.setAllowedOrigins(Arrays.asList("https://gabrielffguimaraes.github.io"));
+        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200","https://gabrielffguimaraes.github.io"));
         corsConfiguration.setAllowedHeaders(All);
         corsConfiguration.setAllowedMethods(All);
         corsConfiguration.setAllowCredentials(true);
